@@ -1,0 +1,60 @@
+---
+title: "Data Analysis and Statistical Inference - Project"
+output: html_document
+---
+**Question**
+Is there a relationship between the highest degree of US residents and their confidence in scientific community between 1990 and 2000?
+
+**Data citation and collection**
+
+Data taken from the General Social Survey (GSS) website. This is a sociological survey used to collect data on demographic characteristics and attitudes of residents of the United States. The survey is conducted face-to-face with an in-person interview by the National Opinion Research Center at the University of Chicago, of adults (18+) in randomly selected households. The survey was conducted every year from 1972 to 1994 (except in 1979, 1981, and 1992). Since 1994, it has been conducted every other year. The data collected about this survey includes both demographic information and respondents' opinions on various matters.
+
+**Cases, variables and sampling**
+
+The cases in the data are respondents, i.e. resident of the United States.
+There are a total of 57061 cases in the survey. However, I will focus only on the time window (1990,2000) which will reduce the number of cases to 16039.
+The two variables I am going to study are the highest degree of the respondent and the confidence in the scientific community. They are referred to as "degree" and "consci" respectively.
+They are both categorical. Degree has 5 levels: "Lt High School", "High School", "Junior College", "Bachelor", "Graduate"
+"A Great Deal", "Only Some" and "Hardly Any" are the three level for the variable consci.
+
+Since data are taken from a survey the study is an observational study.
+The sampling method is a stratified sampling with several stages of selection. The population was first stratified by region, age and race before selection.
+
+The population of interest is the US residents.
+The findings can be generalized to the population since the data are random samples.
+Potential source of bias:
+- GSS selected only English and Spanish speakers. However, only a few percentage of the US population do not speak these two languages so I believe that this bias can be neglected.
+
+**Exploratory data analysis**
+
+Let' first select a subset containing only data from 1990 to 2000
+
+```{r}
+load(url("http://bit.ly/dasi_gss_data"))
+gss_sub <- subset(gss, year >= 1990 & year <=2000, select = c(caseid, year, degree, consci))
+```
+Now let's have a look at the summary of the data.
+
+```{r}
+degree <- gss_sub$degree
+consci <- gss_sub$consci
+summary(degree)
+summary(consci)
+
+```
+As you can see there are many NAs for both variables. We are going to remove them.
+
+
+```{r}
+gss_sub <- gss_sub[complete.cases(gss_sub), ]
+table(degree, consci)
+```
+From the table, roughly the 24% of the US resident between 1990 and 2000 whose highest degree was High School have "A Great Deal" confidence on science. This percentage increases with the degree: 29% of US residents whose highest degree is Junior College, 36% of those with Bachelor and 36% of those Graduate.
+
+A mosaic plot will help to have a better picture of the situation.
+
+```{r}
+mosaicplot( degree ~ consci, data = gss_sub, main = "Confidence in science community by highest degree" )
+
+```
+

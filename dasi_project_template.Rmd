@@ -1,0 +1,53 @@
+---
+title: "project title"
+date: "date"
+output:
+  html_document:
+    theme: cerulean
+---
+
+<!-- For more info on RMarkdown see http://rmarkdown.rstudio.com/ -->
+
+<!-- Enter the code required to load your data in the space below. The data will be loaded but the line of code won't show up in your write up (echo=FALSE) in order to save space-->
+```{r echo=FALSE}
+
+load(url("http://bit.ly/dasi_gss_data"))
+gss_sub <- subset(gss, year >= 1990 & year <=2000, select = c(caseid, year, degree, consci))
+
+```
+
+<!-- In the remainder of the document, add R code chunks as needed -->
+
+### Introduction:
+
+Insert introduction here...
+
+### Data:
+
+Data taken from the General Social Survey (GSS) website. This is a sociological survey used to collect data on demographic characteristics and attitudes of residents of the United States. The survey is conducted face-to-face with an in-person interview by the National Opinion Research Center at the University of Chicago, of adults (18+) in randomly selected households. The survey was conducted every year from 1972 to 1994 (except in 1979, 1981, and 1992). Since 1994, it has been conducted every other year. The data collected about this survey includes both demographic information and respondents' opinions on various matters.
+
+The cases in the data are respondents, i.e. resident of the United States.
+There are a total of 57061 cases in the survey. However, I will focus only on the time window (1990,2000) which will reduce the number of cases to 16039.
+The two variables I am going to study are the highest degree of the respondent and the confidence in the scientific community. They are referred to as "degree" and "consci" respectively.
+They are both categorical. Degree has 5 levels: "Lt High School", "High School", "Junior College", "Bachelor", "Graduate"
+"A Great Deal", "Only Some" and "Hardly Any" are the three level for the variable consci.
+
+Since data are taken from a survey the study is an observational study.
+The sampling method is a stratified sampling with several stages of selection. The population was first stratified by region, age and race before selection.
+
+The population of interest is the US residents.
+The findings can be generalized to the population since the data are random samples.
+Potential source of bias:
+- GSS selected only English and Spanish speakers. However, only a few percentage of the US population do not speak these two languages so I believe that this bias can be neglected.
+
+### Exploratory data analysis:
+
+Insert exploratory data analysis here...
+
+### Inference:
+
+Insert inference section here...
+
+### Conclusion:
+
+Insert conclusion here...
